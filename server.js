@@ -30,8 +30,6 @@ app.post("/app/new/", (req, res) => {
 	const stmt = db.prepare("INSERT INTO userinfo (user, pass) VALUES (?,?)");
 	const info = stmt.run(req.body.user,md5(req.body.pass));
 	res.status(201).json({"message": info.changes + "record created: ID " + info.lastInsertRowid + " (201))"});
-	res.status(201).json({"id": req.body.user});
-
 
 });
  
@@ -42,6 +40,10 @@ app.get("/app/users", (req, res) => {
 });
 
 // READ a single user (HTTP method GET) at endpoint /app/user/:id
+app.get("/app/users", (req, res) => {	
+	const stmt = db.prepare("SELECT * FROM userinfo").all();
+	res.status(200).json(stmt);
+});
 
 // UPDATE a single user (HTTP method PATCH) at endpoint /app/update/user/:id
 
