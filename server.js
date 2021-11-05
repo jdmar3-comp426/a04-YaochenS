@@ -29,7 +29,7 @@ app.get("/app/", (req, res, next) => {
 app.post("/app/new/", (req, res) => {	
 	const stmt = db.prepare("INSERT INTO userinfo (user, pass) VALUES (?,?)");
 	const info = stmt.run(req.body.user,md5(req.body.pass));
-	res.status(201).json({"message": info.changes + " record createed: ID " + info.lastInsertRowid + " (201))"});
+	res.status(201).json({"message": info.changes + " record createed: ID " + info.lastInsertRowid + " (201)"});
 
 });
  
@@ -62,14 +62,14 @@ app.patch("/app/update/user/:id", (req, res) => {
 	}
 
 	const info = stmt.run(usern, pw, req.params.id);
-	res.status(200).json({"message": info.changes + " record updated: ID " + req.params.id + " (200))"});
+	res.status(200).json({"message": info.changes + " record updated: ID " + req.params.id + " (200)"});
 });
 
 // DELETE a single user (HTTP method DELETE) at endpoint /app/delete/user/:id
 app.delete("/app/delete/user/:id", (req, res) => {	
 	const stmt = db.prepare("DELETE FROM userinfo WHERE id = ?");
 	const info = stmt.run(req.params.id);
-	res.status(200).json({"message": info.changes + " record deleted: ID " + req.params.id + " (200))"});
+	res.status(200).json({"message": info.changes + " record deleted: ID " + req.params.id + " (200)"});
 });
 
 // Default response for any other request
