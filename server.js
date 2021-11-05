@@ -61,7 +61,7 @@ app.patch("/app/update/user/:id", (req, res) => {
 		var pw = db.prepare("SELECT pass FROM userinfo WHERE id = ?").get(req.params.id);
 	}
 
-	const info = stmt.run(usern, pw, req.params.id);
+	const info = stmt.run(usern, md5(pw), req.params.id);
 	res.status(200).json({"message": info.changes + " record updated: ID " + req.params.id + " (200)"});
 });
 
